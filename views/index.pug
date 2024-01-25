@@ -3,3 +3,9 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  hr
+  p This inventory has the following stock available:
+  ul
+    li.m-2 #[strong Phones:] !{phones}
+    li.m-2 #[strong Laptops:] !{laptops}
+    
