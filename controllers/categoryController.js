@@ -1,12 +1,12 @@
 const category = require("../models/category");
 const Category = require("../models/category");
 
-exports.category_get = async (req, res) => {
+exports.category_list = async (req, res) => {
   const categories = await Category.find().exec();
-  res.render("index", {
+  res.render("category_list", {
     title: "Home",
     categories: categories,
-  });
+  }); 
 };
 
 exports.category_create_get = (req, res) => {
@@ -18,7 +18,7 @@ exports.category_create_post = async (req, res) => {
     name: req.body.name,
   });
 
-  const createdCategory = await Category.create(category);
+  const createdCategory = await category.save();
   res.redirect(`/category/${createdCategory.url}`);
 };
 
