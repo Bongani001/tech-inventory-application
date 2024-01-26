@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Category = require("../models/category");
-const Item = require("../models/item");
+const categoryController = require("../controllers/categoryController")
 
 /* GET home page. */
 router.get("/", async function (req, res, next) {
@@ -16,5 +16,8 @@ router.get("/", async function (req, res, next) {
     laptops,
   });
 });
+
+// Get request for displaying all categories
+router.get("/", categoryController.category_list)
 
 module.exports = router;

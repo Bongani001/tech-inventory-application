@@ -7,4 +7,22 @@ html
     script(src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js", integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+", crossorigin="anonymous")
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    div.container-fluid.m-1
+      div.row
+        div.col-3
+          ul.sidebar-nav.d-flex.flex-column
+            li.my-2
+              a(href="/categories/phones") Phones
+            li.my-2
+              a(href="/categories/laptops") laptops
+          
+          hr
+
+          ul
+            li.my-2
+              a(href="/categories/phones/create") Add New Phone
+            li.my-3
+              a(href="/categories/laptops/create") Add New Laptop
+
+        div.col-9
+          block content

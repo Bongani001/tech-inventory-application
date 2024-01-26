@@ -1,0 +1,14 @@
+extends layout 
+
+block content
+  h1= title
+
+  p List of Phones available
+  hr
+
+  if phones.length
+  div
+    each phone in phones
+      div
+        h4= phone.name
+        p= phone.description
