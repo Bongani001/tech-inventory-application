@@ -1,0 +1,19 @@
+extends layout 
+
+block content
+  h1= title
+  hr
+
+  if item
+    h4.mb-3 #{item.name}  
+    h5 #[strong Price]: #{item.price}
+    h5 #[strong In Stock]: #{item.inStock}  
+    h5 #[strong Category]: #{item.category.name}
+    div.mt-4
+      h5.m-0 #[strong Description]
+      p #{item.description}
+
+    a(href=`/categories/${item.category.name}/${item.id}/update`)
+      button.btn.btn-primary.mr-3 Update
+    a(href=`/categories/${item.category.name}/${item.id}/delete`)
+      button.btn.btn-danger Delete
