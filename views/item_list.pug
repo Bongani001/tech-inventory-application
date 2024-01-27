@@ -1,0 +1,15 @@
+extends layout 
+
+block content
+  h1= title
+
+  p List of available Phones:
+  hr
+
+  if items.length
+  div
+    each item in items
+      div
+        h4
+          a(href=item.url)= item.name
+        p= item.description

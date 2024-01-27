@@ -1,0 +1,36 @@
+extends layout 
+
+block content 
+  h1= title 
+  hr
+
+  form(method="POST")
+    div.form-group
+      label(for="name") Item name: 
+      input.form-control#name(type="text", name="name", value=(item ? item.name : ""))
+    div.form-group
+      label(for="description") Description: 
+      input.form-control#description(type="text", name="description", value=(item ? item.description : ""))
+    div.form-group
+      label(for="price") Price: 
+      input.form-control#price(type="number", name="price", value=(item ? item.price : ""))
+    div.form-group
+      label(for="inStock") In Stock: 
+      input.form-control#inStock(type="number", name="inStock", value=(item ? item.inStock : ""))
+    div.form-group
+      label(for="category") Category: 
+      select.form-control#category(name="category")
+        option(value='') --Please select a category--
+        each category in categories
+          if item
+            if item.catogory._id === catogory._id
+              option(value=category._id selected) #{category.name}
+            else 
+              option(value=category._id) #{category.name}
+          else 
+            option(value=category._id) #{category.name}
+
+    button.btn.btn-success(type="submit") Create
+
+
+    
