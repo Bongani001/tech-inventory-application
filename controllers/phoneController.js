@@ -1,5 +1,8 @@
 const asyncHandler = require("express-async-handler");
+const { body, validationResult } = require("express-validator");
 const Item = require("../models/item");
+const router = require("../routes/itemsRouter");
+const Category = require("../models/category");
 
 // Display a list of all phones
 exports.phone_list = asyncHandler(async (req, res) => {
@@ -21,4 +24,11 @@ exports.phone_detail = asyncHandler(async (req, res) => {
   }
 
   res.render("item_detail", { title: "Phone Details", item: phone });
+});
+
+// Display a form for creating a new phone
+exports.phone_create_get = asyncHandler(async (req, res) => {
+  const categories = await Category.find().exec();
+
+  res.render("item_form", { title: "Add a Phone", categories });
 });
