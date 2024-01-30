@@ -7,7 +7,7 @@ exports.laptop_list = asyncHandler(async (req, res) => {
   const allItems = await Item.find().populate("category").exec();
   const laptops = allItems.filter((item) => item.category.name === "laptops");
 
-  res.render("item_list", { title: "Phones", items: laptops });
+  res.render("item_list", { title: "Laptops", items: laptops });
 });
 
 // Display details of a certain laptop

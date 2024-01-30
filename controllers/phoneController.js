@@ -1,7 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const Item = require("../models/item");
-const router = require("../routes/itemsRouter");
 const Category = require("../models/category");
 
 // Display a list of all phones
@@ -32,3 +31,46 @@ exports.phone_create_get = asyncHandler(async (req, res) => {
 
   res.render("item_form", { title: "Add a Phone", categories });
 });
+
+exports.phone_create_post = [
+  // Validate and sanitize fields
+  body("name", "Name must not be empty").trim().isLength({ min: 1 }).escape(),
+  body("description", "Description must not be empty")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("price", "Price must be greater than 0").isInt({min: 1}).escape(),
+  body("inStock").isAlphanumeric().escape(),
+  body("category", "Please choose a category")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+
+  // Process the request after validation
+  asyncHandler(async (req, res) => {
+    const errors = validationResult(req);
+
+    const phone = new Item({
+      name: req.body.name,
+      description: req.body.description,
+      category: req.body.category,
+      price: req.body.price,
+      inStock: req.body.inStock,
+    });
+
+    if (!errors.isEmpty()) {
+      // There are errors, render the form again
+      const categories = await Category.find().exec();
+      res.render("item_form", {
+        title: "Add a Phone",
+        categories,
+        item: phone,
+        errors: errors.array(),
+      });
+    } else {
+      const createdPhone = await phone.save();
+      const category = await Category.findById(createdPhone.category).exec();
+      res.redirect(`/categories/${category.name}/${createdPhone._id}`);
+    }
+  }),
+];

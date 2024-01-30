@@ -13,23 +13,27 @@ block content
       input.form-control#description(type="text", name="description", value=(item ? item.description : ""))
     div.form-group
       label(for="price") Price: 
-      input.form-control#price(type="number", name="price", value=(item ? item.price : ""))
+      input.form-control#price(type="number", name="price", value=(item ? item.price : 0))
     div.form-group
       label(for="inStock") In Stock: 
-      input.form-control#inStock(type="number", name="inStock", value=(item ? item.inStock : ""))
+      input.form-control#inStock(type="number", name="inStock", value=(item ? item.inStock : 0))
     div.form-group
       label(for="category") Category: 
       select.form-control#category(name="category")
-        option(value='') --Please select a category--
-        each category in categories
+        //- option(value='') --Please select a category--
+        for category in categories
           if item
-            if item.catogory._id === catogory._id
-              option(value=category._id selected) #{category.name}
+            if item.category.toString() === category.id.toString()
+              option(value=category.id selected) #{category.name}
             else 
-              option(value=category._id) #{category.name}
+              option(value=category.id) #{category.name}
           else 
-            option(value=category._id) #{category.name}
-
+            option(value=category.id) #{category.name}
+    
+    if errors 
+      ul 
+        each error in errors 
+          li= error.msg
     button.btn.btn-success(type="submit") Create
 
 

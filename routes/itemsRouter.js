@@ -11,6 +11,9 @@ router.get("/phones", phoneController.phone_list);
 // GET request to get a form to add a new phone
 router.get("/phones/create", phoneController.phone_create_get);
 
+// POST request to add a new phone
+router.post("/phones/create", phoneController.phone_create_post);
+
 // GET request to get a specific phone
 router.get("/phones/:id", phoneController.phone_detail);
 

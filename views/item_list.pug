@@ -7,9 +7,11 @@ block content
   hr
 
   if items.length
-  div
-    each item in items
-      div
-        h4
-          a(href=item.url)= item.name
-        p= item.description
+    div
+      each item in items
+        div
+          h4
+            a(href=`/categories/${item.category.name}/${item.id}`) #{item.name}
+          p= item.description
+  else
+    p There are no #{title} available
