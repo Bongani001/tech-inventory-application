@@ -34,7 +34,4 @@ block content
       ul 
         each error in errors 
           li= error.msg
-    button.btn.btn-success(type="submit") Create
-
-
-    
+    button.btn.btn-success(type="submit")= item ? "Update" : "Create"
