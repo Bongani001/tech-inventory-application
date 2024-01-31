@@ -26,6 +26,9 @@ router.post("/phones/:id/delete", phoneController.phone_delete_post);
 // GET request to get a specific phone
 router.get("/phones/:id", phoneController.phone_detail);
 
+// POST request to delete a specific phone
+router.post("/phones/:id", phoneController.phone_delete_post);
+
 ////// LAPTOP ROUTER ///////
 
 // GET request to get a list of phones
@@ -48,6 +51,9 @@ router.post("/laptops/:id/update", laptopController.laptop_update_post);
 
 // GET request to get a specific phone
 router.get("/laptops/:id", laptopController.laptop_detail);
+
+// POST request to delete a specific laptop
+router.post("/laptops/:id", laptopController.laptop_delete_post);
 
 
 module.exports = router;

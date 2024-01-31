@@ -125,3 +125,16 @@ exports.laptop_update_post = [
     }
   }),
 ];
+
+exports.laptop_delete_post = asyncHandler(async (req, res, next) => {
+  const laptop = await Item.findById(req.params.id).exec();
+
+  if (laptop === null) {
+    const error = new Error("Phone Not Found.");
+    error.status = 404;
+    return next(error);
+  }
+
+  await Item.findByIdAndDelete(req.params.id);
+  res.redirect("/categories/laptops/");
+});

@@ -13,7 +13,12 @@ block content
       h5.m-0 #[strong Description]
       p #{item.description}
 
-    a(href=`/categories/${item.category.name}/${item.id}/update`)
-      button.btn.btn-primary.mr-3 Update
-    a(href=`/categories/${item.category.name}/${item.id}/delete`)
-      button.btn.btn-danger Delete
+    div.d-flex
+      a(href=`/categories/${item.category.name}/${item.id}/update`)
+        button.btn.btn-primary.mr-3 Update
+
+      form(method="POST")
+        input(type="hidden", name="item", value=item.id)
+        button.btn.btn-danger Delete
+  else
+    p Item does not exist
