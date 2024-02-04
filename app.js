@@ -5,19 +5,19 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
 const indexRouter = require("./routes/index");
-const itemsRouter = require("./routes/itemsRouter")
+const itemsRouter = require("./routes/itemsRouter");
+
+require("dotenv").config();
 
 const app = express();
 
 // MongoDB Database Setup
 const mongoose = require("mongoose");
-mongoose.set("strictQuery", false)
-const mongoDB =
-  "mongodb+srv://gelo:nganiboo@cluster0.pcwibto.mongodb.net/tech-inventory?retryWrites=true&w=majority";
+mongoose.set("strictQuery", false);
 
 main().catch((err) => console.log(err));
 async function main() {
-  await mongoose.connect(mongoDB);
+  await mongoose.connect(process.env.MONGODB);
 }
 
 // view engine setup
@@ -31,7 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/categories", itemsRouter)
+app.use("/categories", itemsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
